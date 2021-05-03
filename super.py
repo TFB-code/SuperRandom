@@ -6,38 +6,9 @@ from time import time_ns as nanoseconds
 
 def super_random(r=0) :
 
-    global first, second, random_seed
-
-    normalisation()
-
-    new_seed=''
-    num1=0; num2=0; num3=0; num4=0; result='';
-
-    for f in range(0,8,1) :
-        num1=int(first[f])
-        num2=int(second[f])
-        if f>3 :
-            num3=int(random_seed[f-4])
-            num4=str(num1+num2+num3)
-            if int(num4)>9 :
-                if int(num4)>18 :
-                    new_seed=new_seed+str(int(num4)-18)
-                else :
-                    new_seed=new_seed+str(int(num4)-9)
-            else :
-                new_seed=new_seed+str(int(num4))[-1]
-        else :
-            num4=str(num1+num2)
-        result=result+num4[-1]
-
-    result=result+'.' ; result=float(result[-1:-10:-1])
-
-    feed_the_seed(new_seed)
+    result=super_fast_random(r)
 
     nano_hop()
-    
-    if r>0 :
-        result=int(result*(r+1))
 
     return result
 
@@ -73,12 +44,11 @@ def super_fast_random(r=0) :
     result=result+'.' ; result=float(result[-1:-10:-1])
 
     feed_the_seed(new_seed)
-    
+  
     if r>0 :
         result=int(result*(r+1))
 
     return result
-
 
 ##  update or manually change the random seed.
 
